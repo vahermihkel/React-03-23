@@ -1,9 +1,13 @@
 import './App.css';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import Avaleht from './pages/Avaleht';
 import Ostukorv from './pages/Ostukorv';
 import LisaToode from './pages/LisaToode';
+import Meist from './pages/Meist';
+import Seaded from './pages/Seaded';
 
+// Kõik suure tähega rohelised tuleb importida
+// Nad ei eksisteeri tavalises HTMLs
 function App() {
   return (
     <div className="App">
@@ -19,10 +23,21 @@ function App() {
         <button className="nupp">Lisa toode</button>      
       </Link>
 
+      <Link to="/meist">
+        <button className="nupp">Meist</button>      
+      </Link>
+
+      <Link to="/seaded">
+        <button className="nupp">Seaded</button>      
+      </Link>
+
       <Routes>
+        <Route path="" element={ <Navigate to="avaleht" /> } />
         <Route path="avaleht" element={ <Avaleht /> } />
         <Route path="ostukorv" element={ <Ostukorv /> } />
         <Route path="lisa-toode" element={ <LisaToode /> } />
+        <Route path="meist" element={ <Meist /> } />
+        <Route path="seaded" element={ <Seaded /> } />
       </Routes>
 
       {/* <div>FOOTER</div> */}
