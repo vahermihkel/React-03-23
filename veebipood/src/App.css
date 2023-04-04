@@ -19,3 +19,21 @@
 .kuldne {
   color: goldenrod;
 }
+
+.tume-leht {
+  background-color: black;
+  color: white;
+}
+
+.hele-leht {
+  background-color: rgb(243, 238, 238);
+}
+
+.tume-leht, .hele-leht {
+  min-height: 100vh; 
+  /* min kõrgus on 100% ekraanist */
+}
+
+.aktiivne-nupp {
+  height: 30px;
+}

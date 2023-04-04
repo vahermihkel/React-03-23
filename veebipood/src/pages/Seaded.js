@@ -12,24 +12,29 @@ function Seaded() {              // tühjus - kui sellist võtit pole (pole kuna
   const emailViide = useRef(); // emailRef
   const telefonViide = useRef(); // phoneRef
 
-  const muudaKeelEst = () => {
-    uuendaKeel("est");
-    localStorage.setItem("keel", "est");  // võti   ,   väärtus
-          // brauseri lokaalmälu, pane sinna midagi
-          // salvestatakse sinna brauserisse, sellesse arvutisse, kus käib setItem()
-          // kui cookied tühjendatakse / avatakse teine brauser / avatakse teine arvuti
-          // seaded lähevad nii nagu esimest korda lehele tulles
-  }
+  // const muudaKeelEst = () => {
+  //   uuendaKeel("est");
+  //   localStorage.setItem("keel", "est");  // võti   ,   väärtus
+  //         // brauseri lokaalmälu, pane sinna midagi
+  //         // salvestatakse sinna brauserisse, sellesse arvutisse, kus käib setItem()
+  //         // kui cookied tühjendatakse / avatakse teine brauser / avatakse teine arvuti
+  //         // seaded lähevad nii nagu esimest korda lehele tulles
+  // }
 
-  const muudaKeelEng = () => {
-    uuendaKeel("eng");
-    localStorage.setItem("keel", "eng");
-    // parem klõps lehel -> inspect (kontrolli) -> application (rakendus), storage
-  }
+  // const muudaKeelEng = () => {
+  //   uuendaKeel("eng");
+  //   localStorage.setItem("keel", "eng");
+  //   // parem klõps lehel -> inspect (kontrolli) -> application (rakendus), storage
+  // }
 
-  const muudaKeelRus = () => {
-    uuendaKeel("rus");
-    localStorage.setItem("keel", "rus");
+  // const muudaKeelRus = () => {
+  //   uuendaKeel("rus");
+  //   localStorage.setItem("keel", "rus");
+  // }
+
+  const muudaKeel = (uusKeel) => {
+    uuendaKeel(uusKeel);
+    localStorage.setItem("keel", uusKeel);
   }
 
   const salvestaAadress = () => {
@@ -39,6 +44,10 @@ function Seaded() {              // tühjus - kui sellist võtit pole (pole kuna
     // tammsaare === tammsaare
     // tammsaare === Tammsaare
  // if (aadressViide.current.value[0].toLowerCase() === aadressViide.current.value[0]) {
+    if (aadressViide.current.value === "") {
+      toast.error("Ei saanud sisestada! Väli tühi!");
+      return; 
+    }
     if (/^[A-ZÜÕÖÄ0-9]/.test(aadressViide.current.value) === false) {
       toast.error("Ei saanud sisestada! Aadress on väikse tähega!");
       return;
@@ -49,6 +58,10 @@ function Seaded() {              // tühjus - kui sellist võtit pole (pole kuna
   }
 
   const salvestaEmail = () => {
+    if (emailViide.current.value === "") {
+      toast.error("Ei saanud sisestada! Väli tühi!");
+      return; 
+    }
     if (emailViide.current.value.includes("@") === false) {
       toast.error("Ei saanud sisestada! Emailil ei ole @ märki!");
       return;
@@ -59,6 +72,10 @@ function Seaded() {              // tühjus - kui sellist võtit pole (pole kuna
   }
 
   const salvestaTelefon = () => {
+    if (telefonViide.current.value === "") {
+      toast.error("Ei saanud sisestada! Väli tühi!");
+      return; // ei lase edasi minna
+    }
     if (/^[0-9]+$/.test(telefonViide.current.value) === false ) {
       toast.error("Ei saanud sisestada! Peab koosnema vaid numbritest!");
       return;
@@ -85,9 +102,9 @@ function Seaded() {              // tühjus - kui sellist võtit pole (pole kuna
       <button onClick={salvestaTelefon}>Salvesta</button>
       <br /> <br />
 
-      <button onClick={muudaKeelEst}>Eesti keelseks</button>
-      <button onClick={muudaKeelEng}>To English</button>
-      <button onClick={muudaKeelRus}>Du Pycckuj</button>
+      <button onClick={() => muudaKeel("est")}>Eesti keelseks</button>
+      <button onClick={() => muudaKeel("eng")}>To English</button>
+      <button onClick={() => muudaKeel("rus")}>Du Pycckuj</button>
       {keel === "est" && <div>Leht on eesti keelne</div>}
       {keel === "eng" && <div>Page is in English</div>}
       {keel === "rus" && <div>Šdeš Pycckij rsõk</div>}

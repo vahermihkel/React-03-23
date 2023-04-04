@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
+import tootedFailist from "../data/tooted.json";
 
 function LisaToode() {
   const [sonum, uuendaSonum] = useState("Lisa toode!");
@@ -13,6 +14,7 @@ function LisaToode() {
       uuendaSonum("Tühja nimetusega toodet ei saa lisada!");
     } else {
       uuendaSonum("Toode lisatud: " + inputiLuger.current.value);
+      tootedFailist.push(inputiLuger.current.value);
     }
   }
 
