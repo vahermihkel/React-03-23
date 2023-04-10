@@ -4,90 +4,105 @@ import poedFailist from "../data/poed.json";
 // data kaustas, poed.json fail
 
 function Poed() { // Reacti funktsionaalsus (pean importima)
-  const [poed, uuendaPoed] = useState(poedFailist);
+  const [poed, uuendaPoed] = useState(poedFailist.slice());
+  // const [poed, uuendaPoed] = useState([...poedFailist]);
 
   const muudaTagasi = () => {
-    uuendaPoed(poedFailist);
+    uuendaPoed(poedFailist.slice());
   }
 
   const sorteeriAZ = () => {
     //poed.sort(); // default, panebki A-Z
-    poed.sort((a,b) => a.localeCompare(b));
+    poed.sort((a,b) => a.nimi.localeCompare(b.nimi));
     uuendaPoed(poed.slice());  // .slice() -- array-del vajalik, 
     // uuendaPoed([...poed]) <--- teine variant
     // kustutab mälukoha ehk pärinevuskoha, teeb koopia
   }
 
   const sorteeriZA = () => {
-    poed.sort((a,b) => b.localeCompare(a)); // ei ole default, pean täitma sulud
-    uuendaPoed(poed.slice());
+    poed.sort((a,b) => b.nimi.localeCompare(a.nimi)); // ei ole default, pean täitma sulud
+    // uuendaPoed(poed.slice());
+    uuendaPoed([...poed]);
   }
 
   const sorteeriTahedKasv = () => {
-    poed.sort((a,b) => a.length - b.length); 
+    poed.sort((a,b) => a.nimi.length - b.nimi.length); 
     uuendaPoed(poed.slice());
   }
 
   const sorteeriTahedKah = () => {
-    poed.sort((a,b) => b.length - a.length); 
+    poed.sort((a,b) => b.nimi.length - a.nimi.length); 
     uuendaPoed(poed.slice());
   }
 
   const sorteeriKolmasTaht = () => {
     // 012345
     // Kristiine
-    poed.sort((a,b) => a[2].localeCompare(b[2])); 
+    poed.sort((a,b) => a.nimi[2].localeCompare(b.nimi[2])); 
     uuendaPoed(poed.slice());
   }
 
   const filtreeriEgaLoppevad = () => {
-    const vastus = poedFailist.filter(yksPood => yksPood.endsWith("e"));
+    const vastus = poedFailist.filter(yksPood => yksPood.nimi.endsWith("e"));
     uuendaPoed(vastus);
   }
 
   const filtreeri9Tahelised = () => {
-    const vastus = poedFailist.filter(yksPood => yksPood.length === 9);
+    const vastus = poedFailist.filter(yksPood => yksPood.nimi.length === 9);
     uuendaPoed(vastus);
   }
 
   const filtreeriVah7Tahte = () => {
-    const vastus = poedFailist.filter(yksPood => yksPood.length >= 7);
+    const vastus = poedFailist.filter(yksPood => yksPood.nimi.length >= 7);
     uuendaPoed(vastus);
   }
 
   const filtreeriSisaldabIsLyhendit = () => {
-    const vastus = poedFailist.filter(yksPood => yksPood.includes("is"));
+    const vastus = poedFailist.filter(yksPood => yksPood.nimi.includes("is"));
     uuendaPoed(vastus);
   }
 
   const filtreeriKolmasTahtI = () => {
-    const vastus = poedFailist.filter(yksPood => yksPood[2] === "i");
+    const vastus = poedFailist.filter(yksPood => yksPood.nimi[2] === "i");
     uuendaPoed(vastus);
   }
 
-  const muudaSuurteks = () => {
-    const vastus = poed.map(yksPood => yksPood.toUpperCase());
+  const muudaSuurteks = () => {               // ... on kõik varasemad väärtused
+    // const vastus = poed.map(yksPood => {return{ ...yksPood, "nimi": yksPood.nimi.toUpperCase() }});
+    const vastus = poed.map(yksPood => {return{ "nimi": yksPood.nimi.toUpperCase(), "tel": yksPood.tel }});
     uuendaPoed(vastus);
   }
 
   const muudaVaikesteks = () => {
-    const vastus = poed.map(yksPood => yksPood.toLowerCase());
+    const vastus = poed.map(yksPood => {return{ "nimi": yksPood.nimi.toLowerCase(), "tel": yksPood.tel }});
     uuendaPoed(vastus);
   }
 
   const muudaITahedOTahtedeks = () => {
-    const vastus = poed.map(yksPood => yksPood.replaceAll("i", "o"));
+    const vastus = poed.map(yksPood => {return{ "nimi": yksPood.nimi.replaceAll("i", "o"), "tel": yksPood.tel }});
     uuendaPoed(vastus);
   }
 
   const muudaKriipsudAlgusesse = () => {
-    const vastus = poed.map(yksPood => "--" + yksPood);
+    // {"nimi": "Ülemiste", "tel": "5412310"} => "--Ülemiste"
+    // minu objekti array ---> tagasi string arrayks
+    const vastus = poed.map(yksPood => {return{ "nimi": "--" + yksPood.nimi, "tel": yksPood.tel }});
     uuendaPoed(vastus);
   }
 
   const muudaTagurpidi = () => {
-    const vastus = poed.map(yksPood => yksPood.split("").reverse().join(""));
+    const vastus = poed.map(yksPood => {return{ "nimi": yksPood.nimi.split("").reverse().join(""), "tel": yksPood.tel }});
     uuendaPoed(vastus);
+  }
+
+  const arvutaTahedKokku = () => {
+    let summa = 0;
+    // summa = summa + 8;
+    // summa = summa + 6;
+    // summa = summa + 13;
+    // summa = summa + 9;
+    poed.forEach(yksPood => summa = summa + yksPood.nimi.length);
+    return summa;
   }
 
   // function sorteeriAZ() {}
@@ -97,6 +112,7 @@ function Poed() { // Reacti funktsionaalsus (pean importima)
     <div>
       <button onClick={muudaTagasi}>Tagasi originaali</button>
       <div>Poode: {poed.length} tk</div>
+      <div>Kokku tähti poodidel: {arvutaTahedKokku()} tk</div>
       {/* <br /><br /> */}
       {/* <button onClick={() => sorteeriAZ()}>Sorteeri A-Z</button> */}
       <button onClick={sorteeriAZ}>Sorteeri A-Z</button>
@@ -118,7 +134,7 @@ function Poed() { // Reacti funktsionaalsus (pean importima)
       <button onClick={muudaTagurpidi}>Muuda kõik tagurpidi</button>
       <br /><br />
 
-      {poed.map(yksPood => <div key={yksPood}>{yksPood}</div> )}
+      {poed.map(yksPood => <div key={yksPood.nimi}>{yksPood.nimi} {yksPood.tel}</div> )}
       {/* <div>----------</div>
       <div>Ülemiste</div>
       <div>Viimsi</div>

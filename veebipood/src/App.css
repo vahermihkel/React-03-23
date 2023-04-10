@@ -37,3 +37,13 @@
 .aktiivne-nupp {
   height: 30px;
 }
+
+.aktiivne-toode {
+  border: 1px solid green;
+  background-color: rgb(243, 245, 243);
+}
+
+.mitteaktiivne-toode {
+  border: 1px solid red;
+  background-color: rgb(248, 244, 244);
+}

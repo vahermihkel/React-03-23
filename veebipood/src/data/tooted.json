@@ -1,1 +1,8 @@
-["Nobe", "Tesla", "BMW"]
+[
+  {"nimi": "Nobe", "hind": 35000, "pilt": "https://nobecars.com/wp-content/uploads/2022/01/Untitled-2-5-1024x473.png", "aktiivne": true}, 
+  {"nimi": "Nissan", "hind": 25000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}, 
+  {"nimi": "Tesla", "hind": 65000, "pilt": "https://upload.wikimedia.org/wikipedia/commons/8/82/Tesla_Model_S_%28Facelift_ab_04-2016%29_trimmed.jpg", "aktiivne": true}, 
+  {"nimi": "Toyota", "hind": 35000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}, 
+  {"nimi": "Bentley", "hind": 85000, "pilt": "https://cache.bmwusa.com/cosy.arox?pov=walkaround&brand=WBBM&vehicle=248J&client=byo&paint=P0300&fabric=FVASW&sa=S01E4,S02VW,S0302,S0319,S0322,S03AG,S03DZ,S0402,S0415,S0416,S0453,S04FM,S04HB,S04L8,S04NB,S05AC,S05AZ,S06AC,S06AK,S06C4,S06NW,S06U3,S06WD,S0710,S0715,S0760,S0775&quality=70&bkgnd=transparent&resp=png&angle=60", "aktiivne": true},
+  {"nimi": "BMW", "hind": 45000, "pilt": "https://iheartcraftythings.com/wp-content/uploads/2021/04/Car-DRAWING-%E2%80%93-STEP-6.jpg", "aktiivne": true}
+]
