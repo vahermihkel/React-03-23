@@ -3,7 +3,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from "./pages/global/HomePage";
 import Cart from "./pages/global/Cart";
-import ContactUs from "./pages/global/ContactUs";
+import { ContactUs } from "./pages/global/ContactUs";
 import Shops from "./pages/global/Shops";
 import SingleProduct from "./pages/global/SingleProduct";
 import AdminHome from "./pages/admin/AdminHome";

@@ -14,7 +14,11 @@ const resources = {
       "maintain-categories": "Maintain categories",
       "maintain-shops": "Maintain shops",
       "add-product": "Add product",
-      "maintain-products": "Maintain products"
+      "maintain-products": "Maintain products",
+      "sorteeriAZ":"Sort A-Z",
+      "sorteeriZA":"Sort Z-A",
+      "sorteeriKasvav":"Sort Ascending",
+      "sorteeriKahanev":"Sort Descending",
     }
   },
   ee: {
@@ -26,7 +30,11 @@ const resources = {
       "maintain-categories": "Halda kategooriaid",
       "maintain-shops": "Halda poode",
       "add-product": "Lisa toode",
-      "maintain-products": "Halda tooteid"
+      "maintain-products": "Halda tooteid",
+      "sorteeriAZ":"Sorteeri A-Z",
+      "sorteeriZA":"Sorteeri Z-A",
+      "sorteeriKasvav":"Sorteeri Kasvav",
+      "sorteeriKahanev":"Sorteeri Kahanev",
     }
   }
 };
