@@ -44,10 +44,10 @@ function App() {
         <Container>
           <Navbar.Brand as={Link} to="/">Webshop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/admin">{t("admin")}</Nav.Link>
-            <Nav.Link as={Link} to="/contact">{t("contact")}</Nav.Link>
-            <Nav.Link as={Link} to="/shops">{t("shops")}</Nav.Link>
-            <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
+            <Nav.Link as={Link} to="/admin">{t("nav.admin")}</Nav.Link>
+            <Nav.Link as={Link} to="/contact">{t("nav.contact")}</Nav.Link>
+            <Nav.Link as={Link} to="/shops">{t("nav.shops")}</Nav.Link>
+            <Nav.Link as={Link} to="/cart">{t("nav.cart")}</Nav.Link>
           </Nav>
           <img className="lang" src="/estonian.png" alt="" onClick={() => updateLanguage("en")} />
           <img className="lang" src="/english.png" alt="" onClick={() => updateLanguage("ee")} />
@@ -59,7 +59,7 @@ function App() {
         <Route path="cart" element={ <Cart /> } />
         <Route path="contact" element={ <ContactUs /> } />
         <Route path="shops" element={ <Shops /> } />
-        <Route path="product" element={ <SingleProduct /> } />
+        <Route path="product/:id" element={ <SingleProduct /> } />
         <Route path="admin" element={ <AdminHome /> } />
         <Route path="admin/add-product" element={ <AddProduct /> } />
         <Route path="admin/edit-product/:id" element={ <EditProduct /> } />

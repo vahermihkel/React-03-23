@@ -1,18 +1,24 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+import productsFromFile from "../../data/products.json"
 
 function SingleProduct() {
-  // HomePage.jsx pealt SingleProduct URL peale sattumine ja saatma element.id
-  // App.js sees tee võimekus see vastu võtta
-
-  // Siin failis useParams abil võta see ID url-st
-
-  // Otsi üles õige toode
-  // MITTE: productsFromFile[id]      productsFromFile[99412312]
-
-  // ÕIGE: productsFromFile.find(e => e.id === Number(URLST_ID))
+  const { id } = useParams();
+  const found = productsFromFile.find(e => e.id === Number(id));
 
   return (
-    <div>SingleProduct</div>
+    <div>
+      {found !== undefined && 
+        <div>
+          <img  src={found.image} alt="" />
+          <div>ID: {id}</div>
+          <div> Name: {found.name} </div>
+          <div> Price: {found.price} </div>
+          <div> Description: {found.description} </div>
+          <div> Category: {found.category} </div>
+        </div>}
+      {found === undefined && <div>Not found</div>}
+    </div>
   )
 }
 
