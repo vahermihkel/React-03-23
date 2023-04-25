@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import config from "../../data/config.json";
 import { t } from 'i18next';
 import { ToastContainer, toast } from 'react-toastify';
 // import { useParams } from 'react-router-dom';
-import productsFromFile from '../../data/products.json'
+// import productsFromFile from '../../data/products.json'
 import { useRef } from 'react';
-import { useState } from 'react';
 
 function AddProduct() {
   // const { id } = useParams();  path="add-product/:id"
@@ -18,6 +18,16 @@ function AddProduct() {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const [idUnique, setIdUnique] = useState(true);
+  const [dbProducts, setDbProducts] = useState([]); // 240tk
+  
+  useEffect(() => {
+    fetch(config.productsDbUrl)
+      .then(res => res.json()) // res ---> headerid, staatuskood
+      .then(json => {
+        // setProducts(json || []);
+        setDbProducts(json || []);
+      }) // mis reaalselt sellelt otspunktilt tuleb
+  }, []);
 
   function add() {
     const addProduct = {
@@ -29,12 +39,14 @@ function AddProduct() {
       "description": descriptionRef.current.value,
       "active": activeRef.current.value.checked,
     }
-    productsFromFile.push(addProduct);
+    dbProducts.push(addProduct);
     toast(t("product_added"));
+    // ANDMEBAASI LISAMINE
+    fetch(config.productsDbUrl,{"method": "PUT", "body": JSON.stringify(dbProducts)})
   }
 
   const checkIdUniqueness = () => {
-    const index = productsFromFile.findIndex(e => e.id === Number(idRef.current.value));
+    const index = dbProducts.findIndex(e => e.id === Number(idRef.current.value));
     if (index === -1) {
       setIdUnique(true)
     } else {

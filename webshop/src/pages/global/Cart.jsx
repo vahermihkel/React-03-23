@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import cartFromFile from '../../data/cart.json'
 import { t } from 'i18next';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,6 +9,13 @@ import "../../css/Cart.css";
 function Cart() {
 
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [parcelMachines, setParcelMachines] = useState([]);
+
+  useEffect(() => {
+    fetch("https://www.omniva.ee/locations.json")
+      .then(res => res.json())
+      .then(json => setParcelMachines(json));
+  }, []);
 
   function clearCart() {
     updateCart([]);
@@ -74,6 +81,14 @@ function Cart() {
         {/* <Button >{t("delete")}</Button> */}
       </div>
       )}
+
+      <select>
+        {parcelMachines
+          // .filter(element => element.NAME !== "1. eelistus Omnivas")
+          // .filter(element => element.A0_NAME === "EE")
+          .filter(element => element.A0_NAME === "EE" && element.NAME !== "1. eelistus Omnivas")
+          .map(element => <option>{element.NAME}</option>)}
+      </select>
 
       <ToastContainer position='bottom-center'></ToastContainer>
     </div>

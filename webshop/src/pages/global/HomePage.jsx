@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import productsFromFile from "../../data/products.json";
+import React, { useEffect, useState } from 'react'
+import config from "../../data/config.json";
+// import productsFromFile from "../../data/products.json";
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 // import cartFromFile from '../../data/cart.json';
@@ -8,13 +9,25 @@ import { Link } from 'react-router-dom';
 import "../../css/HomePage.css";  
 
 function HomePage() {
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]); // väljanäidatav ---> kõikuvas koguses
+  const [dbProducts, setDbProducts] = useState([]); // 240tk
   const { t } = useTranslation(); 
   // const [cart, updateCart] = useState(cartFromFile);
+  
+  useEffect(() => {
+    fetch(config.productsDbUrl)
+      .then(res => res.json()) // res ---> headerid, staatuskood
+      .then(json => {
+        setProducts(json || []);
+        setDbProducts(json || []);
+      }) // mis reaalselt sellelt otspunktilt tuleb
+  }, []);
 
-
-  function filterByCategory() {
-    const result = productsFromFile.filter(element => element.category.includes("motorcycle"));
+                            // camping
+  function filterByCategory(categoryClicked) {
+    //              240 --> category === camping  ---- 60
+    //              60 --> category === usb drive
+    const result = dbProducts.filter(element => element.category === categoryClicked);
     setProducts(result);
   }
 
@@ -44,7 +57,7 @@ function HomePage() {
   }
 
   function resetFilters() {
-    setProducts(productsFromFile);
+    setProducts(dbProducts);
   }
 
   function sortAZ() {
@@ -75,7 +88,9 @@ function HomePage() {
       <Button variant="secondary" onClick={sortPriceDesc}>{t("sort.sorteeriKahanev")}</Button>
       <br /><br />
       <div>{products.length} tk</div>
-      <Button variant="contained" onClick={filterByCategory}>{t("filter_motorcycle")}</Button>
+      <Button variant="contained" onClick={() => filterByCategory("usb drive")}>USB drive</Button>
+      <Button variant="contained" onClick={() => filterByCategory("memory bank")}>Memory bank</Button>
+      <Button variant="contained" onClick={() => filterByCategory("camping")}>Camping</Button>
       <Button  variant="contained" onClick={resetFilters}>Reset</Button>
       <div className="products">
         {products.map(element => 
