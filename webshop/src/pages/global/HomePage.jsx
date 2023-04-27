@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 // import cartFromFile from '../../data/cart.json';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import "../../css/HomePage.css";  
+import styles from "../../css/HomePage.module.css";  
 
 function HomePage() {
   const [products, setProducts] = useState([]); // väljanäidatav ---> kõikuvas koguses
@@ -92,9 +92,9 @@ function HomePage() {
       <Button variant="contained" onClick={() => filterByCategory("memory bank")}>Memory bank</Button>
       <Button variant="contained" onClick={() => filterByCategory("camping")}>Camping</Button>
       <Button  variant="contained" onClick={resetFilters}>Reset</Button>
-      <div className="products">
+      <div className={styles.products}>
         {products.map(element => 
-            <div className="home-product" key={element.id}>
+            <div className={styles["home-product"]} key={element.id}>
               <Link to={"/product/" + element.id}>
                 <img src={element.image} alt="" />
                 <div>{element.name}</div>

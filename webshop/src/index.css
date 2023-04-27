@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+th, td {
+  border: 1px solid black;
+}
+
 /* on see mis mõjub kõikidele failide
 dark-light mode
 font

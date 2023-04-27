@@ -1,21 +1,16 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // import cartFromFile from '../../data/cart.json'
 import { t } from 'i18next';
 import { ToastContainer, toast } from 'react-toastify';
 import Button from '@mui/material/Button';
-import "../../css/Cart.css";
+import styles from "../../css/Cart.module.css";
+import ParcelMachines from '../../components/cart/ParcelMachines';
+import Payment from '../../components/cart/Payment';
 
 function Cart() {
 
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
-  const [parcelMachines, setParcelMachines] = useState([]);
-
-  useEffect(() => {
-    fetch("https://www.omniva.ee/locations.json")
-      .then(res => res.json())
-      .then(json => setParcelMachines(json));
-  }, []);
 
   function clearCart() {
     updateCart([]);
@@ -59,36 +54,32 @@ function Cart() {
       {cart.length > 0 && <Button variant="contained" onClick={clearCart}>{t("clearcart")}</Button>}
       
       {cart.length > 0 && 
-        <div className="totalsection">
+        <div className={styles.totalsection}>
           {cart.length > 0 && <div>{t("total")}: {calcSum()} € </div>}
         </div>}
 
       <br /><br /><br /><br />
       {cart.map((element, qnr) =>
-      <div className="product" key={element.product.id}>
-        <img className="image" src={element.product.image} alt=""></img>
-        <div className="name">{element.product.name}</div>
-        <div className="price">{element.product.price}</div>
-        <div className="quantity">
-          <img className="button" onClick={() => decreaseQuantity(qnr)} src="/minus.png" alt="" />
+      <div className={styles.product} key={element.product.id}>
+        <img className={styles.image} src={element.product.image} alt=""></img>
+        <div className={styles.name}>{element.product.name}</div>
+        <div className={styles.price}>{element.product.price}</div>
+        <div className={styles.quantity}>
+          <img className={styles.button} onClick={() => decreaseQuantity(qnr)} src="/minus.png" alt="" />
           {/* <button>-</button> */}
           <div>{element.quantity}</div>
-          <img className="button" onClick={() => increaseQuantity(qnr)} src="/plus.png" alt="" />
+          <img className={styles.button} onClick={() => increaseQuantity(qnr)} src="/plus.png" alt="" />
           {/* <button>+</button> */}
         </div>
-        <div className="total">{(element.product.price * element.quantity).toFixed(2)}</div>
-        <img className="button" variant="contained" onClick={() => deleteItem(qnr)} src="/remove.png" alt="" />
+        <div className={styles.total}>{(element.product.price * element.quantity).toFixed(2)}</div>
+        <img className={styles.button} variant="contained" onClick={() => deleteItem(qnr)} src="/remove.png" alt="" />
         {/* <Button >{t("delete")}</Button> */}
       </div>
       )}
 
-      <select>
-        {parcelMachines
-          // .filter(element => element.NAME !== "1. eelistus Omnivas")
-          // .filter(element => element.A0_NAME === "EE")
-          .filter(element => element.A0_NAME === "EE" && element.NAME !== "1. eelistus Omnivas")
-          .map(element => <option>{element.NAME}</option>)}
-      </select>
+      <ParcelMachines />
+
+      <Payment sum={calcSum()} />
 
       <ToastContainer position='bottom-center'></ToastContainer>
     </div>

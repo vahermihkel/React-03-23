@@ -25,4 +25,19 @@
   text-align: center;
 }
 
+.active-product {
+  background-color: rgb(246, 249, 246);
+  border: 1px solid green;
+}
+
+.inactive-product {
+  background-color: rgb(247, 240, 240);
+  border: 1px solid red;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+}
+
 /* ühele kindlale kohale CSS */

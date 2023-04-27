@@ -35,22 +35,35 @@ function MaintainProducts() {
     <div>
       <input onChange={searchFromProducts} ref={searchedRef} type="text" />
       <div>{products.length} tk</div>
-       {products.map((element) => 
-          <div key={element.id}>
-            <img src={element.image} alt="" />
-            <div>{element.id}</div>
-            <div>{element.image}</div>
-            <div>{element.name}</div>
-            <div>{element.price}</div>
-            <div>{element.description}</div>
-            <div>{element.category}</div>
-            <div>{element.active}</div>
-            <Link to={"/admin/edit-product/" + element.id}>
-              <button>Edit</button>
-            </Link>
-            <button onClick={() => deleteProduct(element.id)}>Delete</button>
-          </div>
-        )}
+      <table>
+        <tr>
+          <th>Image</th>
+          <th>ID</th>
+          {/* <th>Image URL</th> */}
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+        {products.map((element) => 
+            <tr key={element.id} className={element.active === true ? "active-product" : "inactive-product"}>
+              <td><img className="image" src={element.image} alt="" /></td>
+              <td>{element.id}</td>
+              {/* <td style={{"width": "10%"}}>{element.image}</td> */}
+              <td>{element.name}</td>
+              <td>{element.price}</td>
+              <td>{element.description}</td>
+              <td>{element.category}</td>
+              <td>
+                <Link to={"/admin/edit-product/" + element.id}>
+                  <button>Edit</button>
+                </Link>
+                <button onClick={() => deleteProduct(element.id)}>Delete</button>
+              </td>
+            </tr>
+          )}
+      </table>
     </div>
   )
 }
