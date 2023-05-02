@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 // import cartFromFile from '../../data/cart.json'
 import { t } from 'i18next';
@@ -7,15 +7,17 @@ import Button from '@mui/material/Button';
 import styles from "../../css/Cart.module.css";
 import ParcelMachines from '../../components/cart/ParcelMachines';
 import Payment from '../../components/cart/Payment';
+import { CartSumContext } from '../../store/CartSumContext';
 
 function Cart() {
-
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const { setCartSum } = useContext(CartSumContext);
 
   function clearCart() {
     updateCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
-    toast.success("Cleared")
+    toast.success("Cleared");
+    setCartSum("0.00");
   }
 
   function decreaseQuantity(qnr) {
@@ -25,20 +27,22 @@ function Cart() {
     }
     updateCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
+    setCartSum(calcSum());
   }
 
   function increaseQuantity(qnr) {
     cart[qnr].quantity = cart[qnr].quantity + 1;
     updateCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
+    setCartSum(calcSum());
   }
 
   function deleteItem(qnr) {
     cart.splice(qnr, 1);
     updateCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
-
     toast.success("Item removed");
+    setCartSum(calcSum());
   }
 
   function calcSum() {
@@ -77,9 +81,12 @@ function Cart() {
       </div>
       )}
 
-      <ParcelMachines />
+      {cart.length > 0 && 
+      <>
+        <ParcelMachines />
 
-      <Payment sum={calcSum()} />
+        <Payment sum={calcSum()} />
+      </>}
 
       <ToastContainer position='bottom-center'></ToastContainer>
     </div>

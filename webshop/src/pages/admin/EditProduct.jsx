@@ -3,20 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import config from "../../data/config.json";
 // import productsFromFile from "../../data/products.json";
 import { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 function EditProduct() {
   const { id } = useParams();
   const [dbProducts, setDbProducts] = useState([]); // 240tk
-  // productsFromFile[index]      järjekorranumber       productsFromFile[4]
-
-  // productsFromFile[93876610]
-
-  // "Nobe"
-
-  // ["Nobe", "Tesla", "BMW"]
   const found = dbProducts.find( element => element.id === Number(id) ); // "Nobe"
- // const result = productsFromFile.filter( element => element.id === Number(id) ); // ["Nobe"]
- //const index = productsFromFile.findIndex(element => element.id === Number(id)); // 0
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -27,13 +19,14 @@ function EditProduct() {
   const activeRef = useRef();
   const navigate = useNavigate();
   const [idUnique, setIdUnique] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(config.productsDbUrl)
       .then(res => res.json()) // res ---> headerid, staatuskood
       .then(json => {
-        // setProducts(json || []);
         setDbProducts(json || []);
+        setLoading(false);
       }) // mis reaalselt sellelt otspunktilt tuleb
   }, []);
 
@@ -64,6 +57,10 @@ function EditProduct() {
     } else {
       setIdUnique(false); // leiti kelleltki
     }
+  }
+
+  if (isLoading === true) {
+    return <Spinner variant="primary"/>
   }
 
   return (

@@ -16,7 +16,7 @@ function ParcelMachines() {
         // .filter(element => element.NAME !== "1. eelistus Omnivas")
         // .filter(element => element.A0_NAME === "EE")
         .filter(element => element.A0_NAME === "EE" && element.NAME !== "1. eelistus Omnivas")
-        .map(element => <option>{element.NAME}</option>)}
+        .map(element => <option key={element.NAME}>{element.NAME}</option>)}
     </select>
   )
 }

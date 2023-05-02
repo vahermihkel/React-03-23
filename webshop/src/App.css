@@ -40,4 +40,13 @@
   height: 100px;
 }
 
+.bg-dark {
+  background-color: rgb(84, 76, 76) !important;
+}
+
+.carousel {
+  width: 500px;
+  margin: auto;
+}
+
 /* ühele kindlale kohale CSS */
