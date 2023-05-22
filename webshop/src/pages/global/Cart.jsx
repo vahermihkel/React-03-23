@@ -64,29 +64,33 @@ function Cart() {
 
       <br /><br /><br /><br />
       {cart.map((element, qnr) =>
-      <div className={styles.product} key={element.product.id}>
-        <img className={styles.image} src={element.product.image} alt=""></img>
-        <div className={styles.name}>{element.product.name}</div>
-        <div className={styles.price}>{element.product.price}</div>
-        <div className={styles.quantity}>
+      <div className={styles.product_wrapper}>
+        <div className={styles.product} key={element.product.id}>
+          <img className={styles.image} src={element.product.image} alt=""></img>
+          <div className={styles.name}>{element.product.name}</div>
+          <div className={styles.price}>{element.product.price} €</div>
+          <div className={styles.quantity}>
+            <img className={styles.button} onClick={() => decreaseQuantity(qnr)} src="/minus.png" alt="" />
+            <div>{element.quantity}</div>
+            <img className={styles.button} onClick={() => increaseQuantity(qnr)} src="/plus.png" alt="" />
+          </div>
+          <div className={styles.total}>{(element.product.price * element.quantity).toFixed(2)} €</div>
+          <img className={styles.button} variant="contained" onClick={() => deleteItem(qnr)} src="/remove.png" alt="" />
+        </div>
+        <div className={styles.mobile_row}>
           <img className={styles.button} onClick={() => decreaseQuantity(qnr)} src="/minus.png" alt="" />
-          {/* <button>-</button> */}
           <div>{element.quantity}</div>
           <img className={styles.button} onClick={() => increaseQuantity(qnr)} src="/plus.png" alt="" />
-          {/* <button>+</button> */}
         </div>
-        <div className={styles.total}>{(element.product.price * element.quantity).toFixed(2)}</div>
-        <img className={styles.button} variant="contained" onClick={() => deleteItem(qnr)} src="/remove.png" alt="" />
-        {/* <Button >{t("delete")}</Button> */}
       </div>
       )}
 
       {cart.length > 0 && 
-      <>
+      <React.Fragment>
         <ParcelMachines />
 
         <Payment sum={calcSum()} />
-      </>}
+      </React.Fragment>}
 
       <ToastContainer position='bottom-center'></ToastContainer>
     </div>

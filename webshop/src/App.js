@@ -17,6 +17,7 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import { useContext } from 'react';
 import { AuthContext } from './store/AuthContext';
+import Profile from './pages/auth/Profile';
 
 function App() {
   const { loggedIn } = useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
         <Route path="shops" element={ <Shops /> } />
         <Route path="product/:id" element={ <SingleProduct /> } />
         {loggedIn === true && <>
+          <Route path="profile" element={ <Profile /> } />
           <Route path="admin" element={ <AdminHome /> } />
           <Route path="admin/add-product" element={ <AddProduct /> } />
           <Route path="admin/edit-product/:id" element={ <EditProduct /> } />
@@ -62,8 +64,16 @@ export default App;
 // 09.05 jätame ära
 // 13. 11.05 13.00-16.15
 // 14. 16.05 13.00-16.15
+// lisamisel kontroll, kategooria dropdownist, mobiilivaade
+
 // 15. 18.05 13.00-16.15
+// leheküljed avalehel, Firebase-i pilt, RADIO button
+
 // 16. 23.05 13.00-16.15
-// 17. 25.05 / 01.06 13.00-16.15
+// Makse kinni püüdmist, E-mailiga maksmine (tooted saata e-maili)
+
+// 17. 02.06 13.00-16.15
+// proovitöö Nortalis aastast 2021
 
 // 18. 15.06 13.00-14.30
+// lõpuprojekti esitlemine

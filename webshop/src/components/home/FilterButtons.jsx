@@ -1,17 +1,21 @@
 import { Button } from '@mui/material';
 
 // object destructuring variandi
-function FilterButtons({dbProducts, setProducts, categories}) {
+function FilterButtons({dbProducts, setProducts, setActivePage, setFilteredProducts, categories}) {
   
   function filterByCategory(categoryClicked) {
     //              240 --> category === camping  ---- 60
     //              60 --> category === usb drive
     const result = dbProducts.filter(element => element.category === categoryClicked);
-    setProducts(result);
+    setFilteredProducts(result);
+    setProducts(result.slice(0,20));
+    setActivePage(1);
   }
 
   function resetFilters() {
-    setProducts(dbProducts);
+    setFilteredProducts(dbProducts.slice());
+    setProducts(dbProducts.slice(0,20));
+    setActivePage(1);
   }
 
   return (

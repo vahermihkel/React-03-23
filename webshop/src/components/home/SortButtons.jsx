@@ -7,23 +7,27 @@ function SortButtons(props) {
   const { t } = useTranslation(); 
 
   function sortAZ() {
-    props.products.sort((a, b) => a.name.localeCompare(b.name));
-    props.setProducts(props.products.slice())
+    props.filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+    props.setFilteredProducts(props.filteredProducts.slice());
+    props.setProducts(props.filteredProducts.slice(20*props.page-20, 20*props.page));
   }
 
   function sortZA() {
-    props.products.sort((a, b) => b.name.localeCompare(a.name));
-    props.setProducts(props.products.slice())
+    props.filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+    props.setFilteredProducts(props.filteredProducts.slice());
+    props.setProducts(props.filteredProducts.slice(20*props.page-20, 20*props.page));
   }
 
   function sortPriceAsc() {
-    props.products.sort((a, b) => a.price - b.price);
-    props.setProducts(props.products.slice())
+    props.filteredProducts.sort((a, b) => a.price - b.price);
+    props.setFilteredProducts(props.filteredProducts.slice());
+    props.setProducts(props.filteredProducts.slice(20*props.page-20, 20*props.page));
   }
 
   function sortPriceDesc() {
-    props.products.sort((a, b) => b.price - a.price);
-    props.setProducts(props.products.slice())
+    props.filteredProducts.sort((a, b) => b.price - a.price);
+    props.setFilteredProducts(props.filteredProducts.slice());
+    props.setProducts(props.filteredProducts.slice(20*props.page-20, 20*props.page));
   }
 
   return (
