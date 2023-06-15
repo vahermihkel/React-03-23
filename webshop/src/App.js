@@ -18,6 +18,7 @@ import Signup from './pages/auth/Signup';
 import { useContext } from 'react';
 import { AuthContext } from './store/AuthContext';
 import Profile from './pages/auth/Profile';
+import CheckPayment from './pages/global/CheckPayment';
 
 function App() {
   const { loggedIn } = useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
         <Route path="contact" element={ <ContactUs /> } />
         <Route path="shops" element={ <Shops /> } />
         <Route path="product/:id" element={ <SingleProduct /> } />
+        <Route path="payment" element={ <CheckPayment /> } />
         {loggedIn === true && <>
           <Route path="profile" element={ <Profile /> } />
           <Route path="admin" element={ <AdminHome /> } />

@@ -3,7 +3,7 @@ import React from 'react'
 function Payment(props) {
   
   function pay() {
-    // andmebaasi tellimuse -> maksmata kujul
+    // andmebaasi tellimuse -> maksmata kujul (kirjega MAKSET ON ALUSTATUD)
 
     const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
 
@@ -15,7 +15,7 @@ function Payment(props) {
       "order_reference": Math.random() * 9999999, // 0-1   * 9999999      0.3     65412313
       "nonce": "a9b7f7eadasd" + Math.random() * 9999999 + new Date(),
       "timestamp": new Date(),
-      "customer_url": "https://mihkel-webshop-03-23.web.app"
+      "customer_url": "https://mihkel-webshop-03-23.web.app/payment"
       };
 
     const paymentHeaders = {

@@ -8,6 +8,7 @@ import styles from "../../css/Cart.module.css";
 import ParcelMachines from '../../components/cart/ParcelMachines';
 import Payment from '../../components/cart/Payment';
 import { CartSumContext } from '../../store/CartSumContext';
+import OrderEmail from '../../components/cart/OrderEmail';
 
 function Cart() {
   const [cart, updateCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
@@ -90,6 +91,8 @@ function Cart() {
         <ParcelMachines />
 
         <Payment sum={calcSum()} />
+
+        <OrderEmail totalSum={calcSum()} cartProducts={cart} />
       </React.Fragment>}
 
       <ToastContainer position='bottom-center'></ToastContainer>
